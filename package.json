@@ -1,0 +1,22 @@
+{
+  "name": "variablelendingpool",
+  "description": "",
+  "version": "1.0.0",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KesterTan/VariableLendingPool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KesterTan/VariableLendingPool/issues"
+  },
+  "homepage": "https://github.com/KesterTan/VariableLendingPool#readme"
+}
