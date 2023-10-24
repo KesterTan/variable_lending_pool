@@ -1,0 +1,114 @@
+{
+  "contractName": "Math",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Math.sol\":\"Math\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Math.sol\":{\"keccak256\":\"0x739a9c2477e83c3c9fb241744a0b526e4f228511f6f5793a516d76e699e543e4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8f2474d2aee5cfe8281a4749190e4f038b85a6b0c5bfc836870d314b67ca410f\",\"dweb:/ipfs/QmPeW2XUSMgUVb9gxUTLmibnVcV3qVHbKm7FfgEQWzfrzd\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212200c39c089db542d1fd2465d425b447eb655f3f9354a68c81914ef0bdf9e73bfea64736f6c634300080d0033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212200c39c089db542d1fd2465d425b447eb655f3f9354a68c81914ef0bdf9e73bfea64736f6c634300080d0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "58:46:1:-:0;;;76:26;;;;;;;;;;58:46;;;;;;",
+  "deployedSourceMap": "58:46:1:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.13;\n\ncontract Math {\n  constructor() public {\n  }\n}\n",
+  "sourcePath": "/Users/bowen/proj/VariableLendingPool/contracts/Math.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/Math.sol",
+    "exportedSymbols": {
+      "Math": [
+        13
+      ]
+    },
+    "id": 14,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 8,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Math",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 13,
+        "linearizedBaseContracts": [
+          13
+        ],
+        "name": "Math",
+        "nameLocation": "67:4:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 11,
+              "nodeType": "Block",
+              "src": "97:5:1",
+              "statements": []
+            },
+            "id": 12,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "87:2:1"
+            },
+            "returnParameters": {
+              "id": 10,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "97:0:1"
+            },
+            "scope": 13,
+            "src": "76:26:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 14,
+        "src": "58:46:1",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:73:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2023-10-24T00:09:34.783Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

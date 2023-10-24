@@ -2,7 +2,7 @@
   "name": "variablelendingpool",
   "description": "",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },

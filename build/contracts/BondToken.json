@@ -1,0 +1,122 @@
+{
+  "contractName": "BondToken",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/BondToken.sol\":\"BondToken\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/BondToken.sol\":{\"keccak256\":\"0xa4c1ad0af70504667e10239c55ed1259bb430e1ea5eb1303c333e2627b0001e5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a476b0ba5d194257c4195133687728c28b10a5b42b79f187c5e3dee298a83dd8\",\"dweb:/ipfs/QmZeNfk9zqDsCuRKTWJ99jAwMsKNGdi1HUZrzrRSwsh6M1\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220651a0a30562e578e5e03ae567ddd2c5f334f85b0a92b82c41817f0da7af2131064736f6c634300080d0033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220651a0a30562e578e5e03ae567ddd2c5f334f85b0a92b82c41817f0da7af2131064736f6c634300080d0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "58:51:0:-:0;;;81:26;;;;;;;;;;58:51;;;;;;",
+  "deployedSourceMap": "58:51:0:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.13;\n\ncontract BondToken {\n  constructor() public {\n  }\n}\n",
+  "sourcePath": "/Users/bowen/proj/VariableLendingPool/contracts/BondToken.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/BondToken.sol",
+    "exportedSymbols": {
+      "BondToken": [
+        6
+      ]
+    },
+    "id": 7,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "BondToken",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 6,
+        "linearizedBaseContracts": [
+          6
+        ],
+        "name": "BondToken",
+        "nameLocation": "67:9:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 4,
+              "nodeType": "Block",
+              "src": "102:5:0",
+              "statements": []
+            },
+            "id": 5,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "92:2:0"
+            },
+            "returnParameters": {
+              "id": 3,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "102:0:0"
+            },
+            "scope": 6,
+            "src": "81:26:0",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 7,
+        "src": "58:51:0",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:78:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
+  },
+  "networks": {
+    "1698105294370": {
+      "events": {},
+      "links": {},
+      "address": "0xA8747b40acA0Cf86D7EB66E46B32003BB0361F8F",
+      "transactionHash": "0xc2b2e34b167f8ade18742c92b2815381d18531f4a28ae1ca557e428807bd6aa3"
+    }
+  },
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2023-10-24T00:09:35.292Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
