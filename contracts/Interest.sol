@@ -57,7 +57,7 @@ contract LendingPool {
     Loan[] public loans;
     LoanInterestCalculator public interestCalculator;
     address public owner;
-    
+
     mapping(address => uint256) public usersCollateralDict;
     mapping(address => uint256) public usersBorrowedDict;
 
@@ -78,7 +78,7 @@ contract LendingPool {
         address _borrower,
         uint _loanedAmount,
         uint _creditScore
-    ) private {
+    ) external onlyOwner {
         // Calculate interest using the LoanInterestCalculator
         uint interest = interestCalculator.calculateInterest(_loanedAmount, 1, _creditScore);
 
