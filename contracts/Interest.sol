@@ -52,3 +52,49 @@ contract LoanInterestCalculator {
         riskPremium = newRiskPremium;
     }
 }
+
+contract LendingPool {
+    Loan[] public loans;
+    LoanInterestCalculator public interestCalculator;
+    address public owner;
+    
+    mapping(address => uint256) public usersCollateralDict;
+    mapping(address => uint256) public usersBorrowedDict;
+
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not the owner");
+        _;
+    }
+
+    event LoanCreated(address indexed borrower, uint indexed loanedAmount);
+
+    constructor(address _interestCalculator) {
+        owner = msg.sender;
+        interestCalculator = LoanInterestCalculator(_interestCalculator);
+    }
+
+    function createLoan (
+        address _borrower,
+        uint _loanedAmount,
+        uint _creditScore
+    ) private {
+        // Calculate interest using the LoanInterestCalculator
+        uint interest = interestCalculator.calculateInterest(_loanedAmount, 1, _creditScore);
+
+        // Create a new Loan instance
+        Loan newLoan = new Loan(
+            _borrower,
+            _loanedAmount,
+            interest,
+            block.timestamp + 30 days // Loan duration of 30 days in this example
+        );
+
+        // Add the loan to the list of loans in the pool
+        loans.push(newLoan);
+    }
+
+    function getLoanCount() external view returns (uint) {
+        return loans.length;
+    }
+}
