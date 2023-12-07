@@ -102,17 +102,70 @@ contract LendingPool is Ownable {
 
         // Add the loan to the list of loans in the pool
         loans.push(newLoan);
+    }
 
-        // Mint bonded tokens equivalent to the loan amount and transfer them to the lender
-        bondedToken.mint(msg.sender, _loanedAmount);
+    function requestLoan(
+        uint _loanedAmount,
+        uint _creditScore
+    ) external returns (uint loanId) {
+        // Calculate interest using the LoanInterestCalculator
+        uint interest = interestCalculator.calculateInterest(
+            _loanedAmount,
+            1,
+            _creditScore
+        );
+
+        // Create a new Loan instance
+        Loan newLoan = new Loan(
+            msg.sender,
+            _loanedAmount,
+            interest,
+            block.timestamp + 30 days // Loan duration of 30 days in this example
+        );
+
+        // Add the loan to the list of loans in the pool
+        loans.push(newLoan);
+
+        // Return the loanId
+        return loans.length - 1;
+    }
+
+    function repay(uint loanId) external payable {
+        Loan storage loan = loans[loanId];
+
+        // Check that the borrower is the one calling the function
+        require(
+            msg.sender == loan.borrower,
+            "Only the borrower can repay the loan"
+        );
+
+        // Check that the borrower is repaying the correct amount
+        require(
+            msg.value == loan.loanedAmount + loan.interest_rate,
+            "Incorrect repayment amount"
+        );
+
+        // Mark the loan as paid
+        loan.paid = true;
+    }
+
+    function fund() external payable {
+        // Mint bonded tokens equivalent to the amount of Ether sent and transfer them to the sender
+        bondedToken.mint(msg.sender, msg.value);
     }
 
     function withdraw(uint256 amount) external {
-                // Check that the lender has enough bonded tokens
-        require(bondedToken.balanceOf(msg.sender) >= amount, "Not enough tokens");
+        // Check that the lender has enough bonded tokens
+        require(
+            bondedToken.balanceOf(msg.sender) >= amount,
+            "Not enough tokens"
+        );
 
         // Check that the contract has enough balance to cover the withdrawal
-        require(address(this).balance >= amount, "Not enough funds in the pool");
+        require(
+            address(this).balance >= amount,
+            "Not enough funds in the pool"
+        );
 
         // Transfer the funds plus interest from the pool to the lender
         payable(msg.sender).transfer(amount + interest);
