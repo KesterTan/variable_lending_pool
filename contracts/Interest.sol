@@ -1,5 +1,9 @@
-// SPDX-License-Identifier: MIT 
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Loan {
     address public borrower;
@@ -27,7 +31,11 @@ contract Loan {
 contract LoanInterestCalculator {
     uint256 public riskPremium = 110; // Represents a 10% premium (will get divided by 100 later)
 
-    function calculateInterest(uint256 amount, uint256 exchangeRate, uint256 creditScore) public view returns (uint256) {
+    function calculateInterest(
+        uint256 amount,
+        uint256 exchangeRate,
+        uint256 creditScore
+    ) public view returns (uint256) {
         // Calculate interest based on the risk premium and credit score
         uint256 baseInterest = (amount * riskPremium) / (100 * exchangeRate);
         uint256 creditScoreFactor;
@@ -53,34 +61,36 @@ contract LoanInterestCalculator {
     }
 }
 
-contract LendingPool {
+contract BondedKT is ERC20Burnable, Ownable {
+    constructor() ERC20("BondedKT", "BKT") {}
+}
+
+contract LendingPool is Ownable {
+    BondedKT public bondedToken;
     Loan[] public loans;
     LoanInterestCalculator public interestCalculator;
-    address public owner;
 
     mapping(address => uint256) public usersCollateralDict;
     mapping(address => uint256) public usersBorrowedDict;
-
-
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not the owner");
-        _;
-    }
-
     event LoanCreated(address indexed borrower, uint indexed loanedAmount);
 
     constructor(address _interestCalculator) {
+        bondedToken = new BondedKT();
         owner = msg.sender;
         interestCalculator = LoanInterestCalculator(_interestCalculator);
     }
 
-    function createLoan (
+    function createLoan(
         address _borrower,
         uint _loanedAmount,
         uint _creditScore
     ) external onlyOwner {
         // Calculate interest using the LoanInterestCalculator
-        uint interest = interestCalculator.calculateInterest(_loanedAmount, 1, _creditScore);
+        uint interest = interestCalculator.calculateInterest(
+            _loanedAmount,
+            1,
+            _creditScore
+        );
 
         // Create a new Loan instance
         Loan newLoan = new Loan(
@@ -92,6 +102,20 @@ contract LendingPool {
 
         // Add the loan to the list of loans in the pool
         loans.push(newLoan);
+
+        // Mint bonded tokens equivalent to the loan amount and transfer them to the lender
+        bondedToken.mint(msg.sender, _loanedAmount);
+    }
+
+    function withdraw(uint256 amount) external {
+                // Check that the lender has enough bonded tokens
+        require(bondedToken.balanceOf(msg.sender) >= amount, "Not enough tokens");
+
+        // Check that the contract has enough balance to cover the withdrawal
+        require(address(this).balance >= amount, "Not enough funds in the pool");
+
+        // Transfer the funds plus interest from the pool to the lender
+        payable(msg.sender).transfer(amount + interest);
     }
 
     function getLoanCount() external view returns (uint) {
