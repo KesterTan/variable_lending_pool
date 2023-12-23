@@ -1,37 +1,51 @@
 // App.js
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import SignInUpPage from './SignInUpPage';
 import AccountPage from './AccountPage';
 import { UserProvider, useUser } from './UserContext';
 
-function App() {
-  const { user } = useUser();
-  const [attemptedSignIn, setAttemptedSignIn] = useState(false);
+const App = () => {
+  const { user, authenticateWallet } = useUser();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Redirect the user after signing in
   useEffect(() => {
-    if (user && attemptedSignIn) {
-      // Assume a function for redirecting, replace with your actual navigation logic
-      redirectToAccountPage();
-    }
-  }, [user, attemptedSignIn]);
+    const checkAuthentication = async () => {
+      try {
+        await authenticateWallet();
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error('Authentication error:', error);
+      }
+    };
 
-  const redirectToAccountPage = () => {
-    // Assume a function for redirecting, replace with your actual navigation logic
-    console.log('Redirecting to Account Page');
-  };
+    checkAuthentication();
+  }, [authenticateWallet]);
 
   return (
     <div className="App">
       <UserProvider>
-        {user ? (
-          <AccountPage />
-        ) : (
-          <SignInUpPage onSignInAttempt={() => setAttemptedSignIn(true)} />
-        )}
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <React.Fragment>
+                  {user && isAuthenticated ? (
+                    <Navigate to="/account" replace />
+                  ) : (
+                    <Navigate to="/signin" replace />
+                  )}
+                </React.Fragment>
+              }
+            />
+            <Route path="/signin" element={<SignInUpPage />} />
+            <Route path="/account" element={<AccountPage />} />
+          </Routes>
+        </Router>
       </UserProvider>
     </div>
   );
-}
+};
 
 export default App;
